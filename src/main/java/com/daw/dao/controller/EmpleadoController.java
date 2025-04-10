@@ -16,9 +16,9 @@ public class EmpleadoController {
 	}
 
 	public void crearEmpleado(String firstName, String lastName, String email, String phone, String hireDate,
-			String jobTitle) throws DataAccessException {
+			long managerId, String jobTitle) throws DataAccessException {
 		try {
-			Empleado nuevoEmpleado = new Empleado(0, firstName, lastName, email, phone, hireDate, 0, jobTitle);
+			Empleado nuevoEmpleado = new Empleado(0, firstName, lastName, email, phone, hireDate, managerId, jobTitle);
 			empleadoDAO.insertar(nuevoEmpleado);
 		} catch (DatoIncorrrectoException e) {
 			throw new DataAccessException("Datos incorrectos para el nuevo empleado", e);
@@ -37,7 +37,7 @@ public class EmpleadoController {
 	}
 
 	public void actualizarEmpleado(long employeeId, String firstName, String lastName, String email, String phone,
-			String hireDate, String jobTitle) throws DatoIncorrrectoException, DataAccessException {
+			long managerId, String hireDate, String jobTitle) throws DatoIncorrrectoException, DataAccessException {
 		try {
 			Empleado empleado = new Empleado(employeeId, firstName, lastName, email, phone, hireDate, 0, jobTitle);
 			empleadoDAO.actualizar(empleado);

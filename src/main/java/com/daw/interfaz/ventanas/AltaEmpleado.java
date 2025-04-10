@@ -7,15 +7,23 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.border.EmptyBorder;
 
 import com.daw.dao.controller.EmpleadoController;
+import com.daw.excepciones.DataAccessException;
+import com.daw.modelos.Empleado;
+
 import javax.swing.JSpinner;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import javax.swing.JComboBox;
 
 public class AltaEmpleado extends JDialog {
 
@@ -27,6 +35,7 @@ public class AltaEmpleado extends JDialog {
 	private JTextField textEmail;
 	private JTextField textPhone;
 	private JTextField textJobTitle;
+	private JComboBox<String> comboBox = new JComboBox();
 
 	/**
 	 * Launch the application.
@@ -127,6 +136,16 @@ public class AltaEmpleado extends JDialog {
 		dateSpinner.setBounds(280, 275, 209, 32);
 		contentPanel.add(dateSpinner);
 		{
+			JLabel lblManager = new JLabel("Manager");
+			lblManager.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			lblManager.setBounds(21, 382, 150, 47);
+			contentPanel.add(lblManager);
+		}
+
+		comboBox.setBounds(280, 396, 216, 22);
+		contentPanel.add(comboBox);
+		cargarJefes();
+		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -135,8 +154,21 @@ public class AltaEmpleado extends JDialog {
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						String nombreString = textName.getText();
-						String apellidosString = textLastName.getText();
+						try {
+							String nombreString = textName.getText();
+							String apellidosString = textLastName.getText();
+							String emailString = textEmail.getText();
+							String phoneString = textPhone.getText();
+							String jobTitleString = textJobTitle.getText();
+							String hireDate = new SimpleDateFormat("yyyy-MM-dd").format(dateSpinner.getValue());
+							long managerSeleccionado = (long) comboBox.getSelectedIndex();
+
+							empleadoController.crearEmpleado(nombreString, apellidosString, emailString, phoneString,
+									hireDate, managerSeleccionado, jobTitleString);
+						} catch (DataAccessException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				});
 
@@ -149,6 +181,20 @@ public class AltaEmpleado extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
+		}
+	}
+
+	private void cargarJefes() {
+		comboBox.addItem("Ninguno"); // para representar "sin manager"
+
+		try {
+			List<Empleado> empleados = empleadoController.obtenerTodosEmpleados();
+			for (Empleado empleado : empleados) {
+				comboBox.addItem(empleado.getName() + " " + empleado.getLastName());
+			}
+		} catch (DataAccessException e) {
+			JOptionPane.showMessageDialog(this, "Error al cargar los empleados: " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }

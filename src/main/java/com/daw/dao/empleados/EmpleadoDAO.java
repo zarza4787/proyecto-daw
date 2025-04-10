@@ -16,7 +16,7 @@ import com.daw.utils.DBUtils;
 
 public class EmpleadoDAO implements Dao<Empleado> {
 
-	private final String QUERY_INSERTAR_EMPLEADO = "INSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE, HIRE_DATE, JOB_TITLE) VALUES (?, ?, ?, ?, ?, ?)";
+	private final String QUERY_INSERTAR_EMPLEADO = "INSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE, HIRE_DATE, MANAGER_ID, JOB_TITLE) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	private final String QUERY_ELIMINAR_EMPLEADO = "DELETE FROM EMPLOYEES WHERE EMPLOYEE_ID = ?";
 	private final String QUERY_ACTULIZAR_EMPLEADO = "UPDATE EMPLOYEES SET FIRST_NAME = ?, LAST_NAME = ?, EMAIL = ?, PHONE = ?, JOB_TITLE = ? WHERE EMPLOYEE_ID = ?";
 	private final String QUERY_OBTENER_TODOS = "SELECT * FROM EMPLOYEES";
@@ -32,7 +32,8 @@ public class EmpleadoDAO implements Dao<Empleado> {
 			ps.setString(4, e.getPhone());
 			Date hireDateSQL = Date.valueOf(e.getHireDate());
 			ps.setDate(5, hireDateSQL);
-			ps.setString(6, e.getJobTitle());
+			ps.setLong(6, e.getManagerId());
+			ps.setString(7, e.getJobTitle());
 
 			int columnas_afectadas = ps.executeUpdate();
 
