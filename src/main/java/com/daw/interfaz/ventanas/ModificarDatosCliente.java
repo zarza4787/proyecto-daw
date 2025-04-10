@@ -1,4 +1,4 @@
-package com.daw.dao.interfaz.ventanas;
+package com.daw.interfaz.ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class RankingEmpleadosPorVolumenVentas extends JDialog {
+public class ModificarDatosCliente extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -18,7 +18,7 @@ public class RankingEmpleadosPorVolumenVentas extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			RankingEmpleadosPorVolumenVentas dialog = new RankingEmpleadosPorVolumenVentas();
+			ModificarDatosCliente dialog = new ModificarDatosCliente();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -29,8 +29,8 @@ public class RankingEmpleadosPorVolumenVentas extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public RankingEmpleadosPorVolumenVentas() {
-		setTitle("Ranking de empleados por volumen de ventas");
+	public ModificarDatosCliente() {
+		setTitle("Modificar datos de un cliente");
 		setBounds(100, 100, 450, 300);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());

@@ -30,10 +30,10 @@ public class Empleado {
 		this.managerId = managerId;
 		this.jobTitle = jobTitle;
 	}
-	
+
 	// Constructor para eliminar empleado
 	public Empleado(long employeeId) throws DataAccessException {
-		if (employeeId <= 0 ) {
+		if (employeeId <= 0) {
 			throw new DataAccessException("La ID tiene que ser un numero mayor que 0");
 		}
 	}

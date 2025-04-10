@@ -1,4 +1,4 @@
-package com.daw.dao.interfaz.ventanas;
+package com.daw.interfaz.ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class TraspasoCierreAlmacen extends JDialog {
+public class CancelarPedidoDevolverAlmacen extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -18,7 +18,7 @@ public class TraspasoCierreAlmacen extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			TraspasoCierreAlmacen dialog = new TraspasoCierreAlmacen();
+			CancelarPedidoDevolverAlmacen dialog = new CancelarPedidoDevolverAlmacen();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -29,8 +29,8 @@ public class TraspasoCierreAlmacen extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public TraspasoCierreAlmacen() {
-		setTitle("Traspaso y cierre de almacen");
+	public CancelarPedidoDevolverAlmacen() {
+		setTitle("Cancelar pedido y devolver a almacen");
 		setBounds(100, 100, 450, 300);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());

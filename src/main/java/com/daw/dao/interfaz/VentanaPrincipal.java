@@ -9,15 +9,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.daw.dao.interfaz.ventanas.AltaAlmacen;
-import com.daw.dao.interfaz.ventanas.AltaEmpleado;
-import com.daw.dao.interfaz.ventanas.AplicarDescuentoPorCategoria;
-import com.daw.dao.interfaz.ventanas.EliminarEmpleado;
-import com.daw.dao.interfaz.ventanas.InformeVentasManager;
-import com.daw.dao.interfaz.ventanas.ModificarDatosCliente;
-import com.daw.dao.interfaz.ventanas.PedidosClienteVistaDetalle;
-import com.daw.dao.interfaz.ventanas.RankingEmpleadosPorVolumenVentas;
-import com.daw.dao.interfaz.ventanas.TraspasoCierreAlmacen;
+import com.daw.interfaz.ventanas.AltaAlmacen;
+import com.daw.interfaz.ventanas.AltaEmpleado;
+import com.daw.interfaz.ventanas.AplicarDescuentoPorCategoria;
+import com.daw.interfaz.ventanas.EliminarEmpleado;
+import com.daw.interfaz.ventanas.InformeVentasManager;
+import com.daw.interfaz.ventanas.ModificarDatosCliente;
+import com.daw.interfaz.ventanas.PedidosClienteVistaDetalle;
+import com.daw.interfaz.ventanas.RankingEmpleadosPorVolumenVentas;
+import com.daw.interfaz.ventanas.TraspasoCierreAlmacen;
 
 public class VentanaPrincipal extends JFrame {
 

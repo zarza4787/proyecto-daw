@@ -1,4 +1,4 @@
-package com.daw.dao.interfaz.ventanas;
+package com.daw.interfaz.ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class EliminarEmpleado extends JDialog {
+public class AltaAlmacen extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -18,7 +18,7 @@ public class EliminarEmpleado extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			EliminarEmpleado dialog = new EliminarEmpleado();
+			AltaAlmacen dialog = new AltaAlmacen();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -29,8 +29,8 @@ public class EliminarEmpleado extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public EliminarEmpleado() {
-		setTitle("Eliminar empleado");
+	public AltaAlmacen() {
+		setTitle("Alta Almacen");
 		setBounds(100, 100, 450, 300);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());

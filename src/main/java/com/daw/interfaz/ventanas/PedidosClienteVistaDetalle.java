@@ -1,4 +1,4 @@
-package com.daw.dao.interfaz.ventanas;
+package com.daw.interfaz.ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class AltaAlmacen extends JDialog {
+public class PedidosClienteVistaDetalle extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -18,7 +18,7 @@ public class AltaAlmacen extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			AltaAlmacen dialog = new AltaAlmacen();
+			PedidosClienteVistaDetalle dialog = new PedidosClienteVistaDetalle();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -29,8 +29,8 @@ public class AltaAlmacen extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public AltaAlmacen() {
-		setTitle("Alta Almacen");
+	public PedidosClienteVistaDetalle() {
+		setTitle("Pedidos de un cliente y vista detalle");
 		setBounds(100, 100, 450, 300);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
