@@ -30,7 +30,7 @@ public class EmpleadoController {
 
 	public void eliminarEmpleado(long employeeId) throws DataAccessException {
 		try {
-			Empleado empleado = new Empleado(employeeId, "", "", "", "", "", 0, "");
+			Empleado empleado = new Empleado(employeeId);
 			empleadoDAO.eliminar(empleado);
 		} catch (Exception e) {
 			throw new DataAccessException("Hubo un error al eliminar al empleado", e);
@@ -50,6 +50,10 @@ public class EmpleadoController {
 	}
 
 	public List<Empleado> obtenerTodosEmpleados() throws DataAccessException {
-		return empleadoDAO.obtenerTodos();
+		try {
+			return empleadoDAO.obtenerTodos();
+		} catch (Exception e) {
+			throw new DataAccessException("Hubo un error al obtener a los empleados " + e);
+		}
 	}
 }

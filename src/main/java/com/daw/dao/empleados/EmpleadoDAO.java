@@ -40,7 +40,7 @@ public class EmpleadoDAO implements Dao<Empleado> {
 			if (columnas_afectadas == 0) {
 				System.out.println("No se a insertado ningun empleado en el sistema");
 			} else {
-				System.out.println("Empleado creado con éxito.");
+				System.out.println("Empleado creado con exito.");
 				System.out.println(columnas_afectadas);
 			}
 
@@ -76,12 +76,12 @@ public class EmpleadoDAO implements Dao<Empleado> {
 		try (Connection conn = DBUtils.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement(QUERY_ACTULIZAR_EMPLEADO);
 
-			ps.setLong(1, e.getEmployeeID());
-			ps.setString(2, e.getName());
-			ps.setString(3, e.getLastName());
-			ps.setString(4, e.getEmail());
-			ps.setString(5, e.getPhone());
-			ps.setString(6, e.getJobTitle());
+			ps.setString(1, e.getName());
+			ps.setString(2, e.getLastName());
+			ps.setString(3, e.getEmail());
+			ps.setString(4, e.getPhone());
+			ps.setString(5, e.getJobTitle());
+			ps.setLong(6, e.getEmployeeID());
 
 			int columnas_afectadas = ps.executeUpdate();
 

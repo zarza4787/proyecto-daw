@@ -1,5 +1,6 @@
 package com.daw.modelos;
 
+import com.daw.excepciones.DataAccessException;
 import com.daw.excepciones.DatoIncorrrectoException;
 
 public class Empleado {
@@ -28,6 +29,13 @@ public class Empleado {
 		this.hireDate = hireDate;
 		this.managerId = managerId;
 		this.jobTitle = jobTitle;
+	}
+	
+	// Constructor para eliminar empleado
+	public Empleado(long employeeId) throws DataAccessException {
+		if (employeeId <= 0 ) {
+			throw new DataAccessException("La ID tiene que ser un numero mayor que 0");
+		}
 	}
 
 	public long getEmployeeID() {

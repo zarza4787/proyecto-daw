@@ -29,10 +29,10 @@ public class AlmacenController {
 
 	public void eliminarAlmacen(long wareHouseId) throws DataAccessException, DatoIncorrrectoException {
 		try {
-			Almacen almacen = new Almacen(wareHouseId, 0, "");
+			Almacen almacen = new Almacen(wareHouseId);
 			almacenDAO.eliminar(almacen);
 		} catch (DataAccessException e) {
-			throw new DataAccessException("Hubo un error al crear el almacen" + e);
+			throw new DataAccessException("Hubo un error al eliminar el almacen", e);
 		}
 	}
 
@@ -42,7 +42,7 @@ public class AlmacenController {
 			Almacen almacen = new Almacen(WareHouseId, locationId, wareHouseName);
 			almacenDAO.actualizar(almacen);
 		} catch (DataAccessException e) {
-			throw new DataAccessException("Hubo un error al crear el almacen" + e);
+			throw new DataAccessException("Hubo un error al actualizar el almacen" + e);
 		}
 	}
 

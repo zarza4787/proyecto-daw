@@ -30,7 +30,7 @@ public class AltaEmpleado extends JDialog {
 	 * Create the dialog.
 	 */
 	public AltaEmpleado() {
-	
+		setTitle("Insertar Empleado");
 		setBounds(100, 100, 450, 300);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());

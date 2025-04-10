@@ -15,9 +15,9 @@ import com.daw.utils.DBUtils;
 
 public class AlmacenDAO implements Dao<Almacen> {
 
-	private final String QUERY_INSERTAR_ALMACEN = "INSERT INTO WAREHOUSES (WAREHOUSE_ID, WAREHOUSE_NAME, LOCATION_ID) VALUES (?, ?, ?)";
+	private final String QUERY_INSERTAR_ALMACEN = "INSERT INTO WAREHOUSES (WAREHOUSE_NAME, LOCATION_ID) VALUES (?, ?)";
 	private final String QUERY_ELIMINAR_ALMACEN = "DELETE FROM WAREHOUSES WHERE WAREHOUSE_ID = ?";
-	private final String QUERY_ACTULIZAR_ALMACEN = "UPDATE WAREHOUSES SET WAREHOUSE_ID = ?, WAREHOUSE_NAME = ?, LOCATION_ID = ?";
+	private final String QUERY_ACTULIZAR_ALMACEN = "UPDATE WAREHOUSES SET WAREHOUSE_NAME = ?, LOCATION_ID = ? WHERE WAREHOUSE_ID = ?";
 	private final String QUERY_OBTENER_TODOS = "SELECT * FROM WAREHOUSES";
 
 	@Override
@@ -25,9 +25,8 @@ public class AlmacenDAO implements Dao<Almacen> {
 		try (Connection conn = DBUtils.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement(QUERY_INSERTAR_ALMACEN);
 
-			ps.setLong(1, e.getWareHouseId());
-			ps.setString(2, e.getNameWareHouse());
-			ps.setLong(3, e.getLocationID());
+			ps.setString(1, e.getNameWareHouse());
+			ps.setLong(2, e.getLocationID());
 
 			int columnas_afectadas = ps.executeUpdate();
 
@@ -35,7 +34,7 @@ public class AlmacenDAO implements Dao<Almacen> {
 			if (columnas_afectadas == 0) {
 				System.out.println("No se ha insertado ningun almacen en el sistema");
 			} else {
-				System.out.println("Almacén eliminado con éxito.");
+				System.out.println("Almacén insertado con exito.");
 			}
 		} catch (SQLException sql) {
 			throw new DataAccessException("Hubo un error al insertar un nuevo almacen", sql);
@@ -44,6 +43,10 @@ public class AlmacenDAO implements Dao<Almacen> {
 
 	@Override
 	public void eliminar(Almacen e) throws DataAccessException {
+		if (e == null || e.getWareHouseId() <= 0) {
+			throw new DataAccessException("La ID del almacen que has propocionado no es valida");
+		}
+
 		try (Connection conn = DBUtils.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement(QUERY_ELIMINAR_ALMACEN);
 
@@ -65,8 +68,8 @@ public class AlmacenDAO implements Dao<Almacen> {
 
 	@Override
 	public void actualizar(Almacen e) throws DataAccessException {
-		if (e == null) {
-			throw new DataAccessException("El almacen no puede ser nulo");
+		if (e == null || e.getWareHouseId() <= 0) {
+			throw new DataAccessException("La ID del almacen que has propocionado no es valida");
 		}
 
 		try (Connection conn = DBUtils.getConnection()) {
@@ -74,6 +77,7 @@ public class AlmacenDAO implements Dao<Almacen> {
 
 			ps.setString(1, e.getNameWareHouse());
 			ps.setLong(2, e.getLocationID());
+			ps.setLong(3, e.getLocationID());
 
 			int columnas_afectadas = ps.executeUpdate();
 

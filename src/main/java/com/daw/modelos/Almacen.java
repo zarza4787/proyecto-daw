@@ -18,6 +18,15 @@ public class Almacen {
 		this.wareHouseName = wareHouseName;
 	}
 
+	// Constructor para eliminar almacen
+	public Almacen(long wareHouseId) throws DatoIncorrrectoException {
+		if (wareHouseId <= 0) {
+			throw new DatoIncorrrectoException("El ID del almacen debe ser mayor que 0");
+		}
+
+		this.wareHouseId = wareHouseId;
+	}
+
 	public long getWareHouseId() {
 		return wareHouseId;
 	}
