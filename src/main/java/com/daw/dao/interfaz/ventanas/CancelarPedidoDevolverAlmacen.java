@@ -30,6 +30,7 @@ public class CancelarPedidoDevolverAlmacen extends JDialog {
 	 * Create the dialog.
 	 */
 	public CancelarPedidoDevolverAlmacen() {
+		setTitle("Cancelar pedido y devolver a almacen");
 		setBounds(100, 100, 450, 300);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());

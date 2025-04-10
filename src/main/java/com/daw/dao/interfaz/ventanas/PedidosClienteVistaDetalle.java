@@ -30,6 +30,7 @@ public class PedidosClienteVistaDetalle extends JDialog {
 	 * Create the dialog.
 	 */
 	public PedidosClienteVistaDetalle() {
+		setTitle("Pedidos de un cliente y vista detalle");
 		setBounds(100, 100, 450, 300);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());

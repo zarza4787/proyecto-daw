@@ -30,6 +30,7 @@ public class TraspasoCierreAlmacen extends JDialog {
 	 * Create the dialog.
 	 */
 	public TraspasoCierreAlmacen() {
+		setTitle("Traspaso y cierre de almacen");
 		setBounds(100, 100, 450, 300);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());

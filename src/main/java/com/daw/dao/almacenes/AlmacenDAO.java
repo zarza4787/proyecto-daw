@@ -77,7 +77,7 @@ public class AlmacenDAO implements Dao<Almacen> {
 
 			ps.setString(1, e.getNameWareHouse());
 			ps.setLong(2, e.getLocationID());
-			ps.setLong(3, e.getLocationID());
+			ps.setLong(3, e.getWareHouseId());
 
 			int columnas_afectadas = ps.executeUpdate();
 

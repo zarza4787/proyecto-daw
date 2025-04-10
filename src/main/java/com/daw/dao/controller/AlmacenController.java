@@ -3,7 +3,6 @@ package com.daw.dao.controller;
 import java.util.List;
 
 import com.daw.dao.almacenes.AlmacenDAO;
-import com.daw.dao.almacenes.AlmacenDAOImpl;
 import com.daw.excepciones.DataAccessException;
 import com.daw.excepciones.DatoIncorrrectoException;
 import com.daw.modelos.Almacen;
@@ -13,7 +12,7 @@ public class AlmacenController {
 	private AlmacenDAO almacenDAO;
 
 	public AlmacenController() {
-		this.almacenDAO = new AlmacenDAOImpl();
+		this.almacenDAO = new AlmacenDAO();
 	}
 
 	public void crearAlmacen(long locationId, String wareHouseName) throws DataAccessException {

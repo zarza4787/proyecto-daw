@@ -30,6 +30,7 @@ public class InformeVentasManager extends JDialog {
 	 * Create the dialog.
 	 */
 	public InformeVentasManager() {
+		setTitle("Informe de ventas de un manager");
 		setBounds(100, 100, 450, 300);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());

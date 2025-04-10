@@ -30,6 +30,7 @@ public class ModificarDatosCliente extends JDialog {
 	 * Create the dialog.
 	 */
 	public ModificarDatosCliente() {
+		setTitle("Modificar datos de un cliente");
 		setBounds(100, 100, 450, 300);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());

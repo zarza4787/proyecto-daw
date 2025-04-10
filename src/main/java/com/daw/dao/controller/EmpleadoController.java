@@ -3,7 +3,6 @@ package com.daw.dao.controller;
 import java.util.List;
 
 import com.daw.dao.empleados.EmpleadoDAO;
-import com.daw.dao.empleados.EmpleadoDAOImpl;
 import com.daw.excepciones.DataAccessException;
 import com.daw.excepciones.DatoIncorrrectoException;
 import com.daw.modelos.Empleado;
@@ -13,7 +12,7 @@ public class EmpleadoController {
 	private EmpleadoDAO empleadoDAO;
 
 	public EmpleadoController() {
-		this.empleadoDAO = new EmpleadoDAOImpl();
+		this.empleadoDAO = new EmpleadoDAO();
 	}
 
 	public void crearEmpleado(String firstName, String lastName, String email, String phone, String hireDate,
