@@ -1,4 +1,4 @@
-package com.daw.dao.interfaz;
+package com.daw.interfaz;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
