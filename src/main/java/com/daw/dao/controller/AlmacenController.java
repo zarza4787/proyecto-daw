@@ -6,6 +6,7 @@ import com.daw.dao.almacenes.AlmacenDAO;
 import com.daw.excepciones.DataAccessException;
 import com.daw.excepciones.DatoIncorrrectoException;
 import com.daw.modelos.Almacen;
+import com.daw.modelos.Region;
 
 public class AlmacenController {
 
@@ -51,5 +52,15 @@ public class AlmacenController {
 		} catch (Exception e) {
 			throw new DataAccessException("Error al obtener los almacenes", e);
 		}
+	}
+
+	public List<Region> obtenerTodasRegiones() throws DataAccessException {
+
+		try {
+			return almacenDAO.obtenerRegiones();
+		} catch (Exception e) {
+			throw new DataAccessException("Error al obtener las regiones", e);
+		}
+
 	}
 }

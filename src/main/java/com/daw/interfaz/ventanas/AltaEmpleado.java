@@ -24,10 +24,14 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AltaEmpleado extends JDialog {
 
-	private static final long serialVersionUID = 1L;
+	// Declaracion del panel, el empleadoController y de los textField para que el
+	// usuario introduzca los datos
+
 	private final JPanel contentPanel = new JPanel();
 	private EmpleadoController empleadoController;
 	private JTextField textName;
@@ -151,9 +155,9 @@ public class AltaEmpleado extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
-				okButton.addMouseListener(new MouseAdapter() {
+				okButton.addActionListener(new ActionListener() {
 					@Override
-					public void mouseClicked(MouseEvent e) {
+					public void actionPerformed(ActionEvent e) {
 						try {
 							String nombreString = textName.getText();
 							String apellidosString = textLastName.getText();
@@ -165,9 +169,13 @@ public class AltaEmpleado extends JDialog {
 
 							empleadoController.crearEmpleado(nombreString, apellidosString, emailString, phoneString,
 									hireDate, managerSeleccionado, jobTitleString);
+
+							JOptionPane.showMessageDialog(null, "Empleado insertado correctamente", "Exito",
+									JOptionPane.INFORMATION_MESSAGE);
+							dispose();
 						} catch (DataAccessException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+							JOptionPane.showMessageDialog(null, "Error al insertar empleado: " + e1.getMessage(),
+									"Error", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				});
@@ -185,8 +193,6 @@ public class AltaEmpleado extends JDialog {
 	}
 
 	private void cargarJefes() {
-		comboBox.addItem("Ninguno"); // para representar "sin manager"
-
 		try {
 			List<Empleado> empleados = empleadoController.obtenerTodosEmpleados();
 			for (Empleado empleado : empleados) {

@@ -35,15 +35,7 @@ public class EmpleadoDAO implements Dao<Empleado> {
 			ps.setLong(6, e.getManagerId());
 			ps.setString(7, e.getJobTitle());
 
-			int columnas_afectadas = ps.executeUpdate();
-
-			// Nos dice si se ha modificado alguna columna
-			if (columnas_afectadas == 0) {
-				System.out.println("No se a insertado ningun empleado en el sistema");
-			} else {
-				System.out.println("Empleado creado con exito.");
-				System.out.println(columnas_afectadas);
-			}
+			ps.executeUpdate();
 
 		} catch (SQLException sql) {
 			throw new DataAccessException("Error al insertar el empleado", sql);
@@ -57,15 +49,8 @@ public class EmpleadoDAO implements Dao<Empleado> {
 
 			ps.setLong(1, e.getEmployeeID());
 
-			int columnas_afectadas = ps.executeUpdate();
+			ps.executeUpdate();
 
-			// Nos dice si se ha modificado alguna columna
-			if (columnas_afectadas == 0) {
-				System.out.println("No se encontró el empleado con el ID proporcionado");
-			} else {
-				System.out.println("Empleado eliminado con éxito.");
-				System.out.println(columnas_afectadas);
-			}
 		} catch (SQLException sql) {
 			throw new DataAccessException("Hubo un error al eliminar el empleado", sql);
 		}
@@ -84,14 +69,7 @@ public class EmpleadoDAO implements Dao<Empleado> {
 			ps.setString(5, e.getJobTitle());
 			ps.setLong(6, e.getEmployeeID());
 
-			int columnas_afectadas = ps.executeUpdate();
-
-			// Nos dice si se ha modificado alguna columna
-			if (columnas_afectadas == 0) {
-				System.out.println("No se actualizado ningun empleado");
-			} else {
-				System.out.println("Empleado actualizado con éxito.");
-			}
+			ps.executeUpdate();
 
 		} catch (SQLException sql) {
 			throw new DataAccessException("Hubo un error al actualizar el empleado", sql);

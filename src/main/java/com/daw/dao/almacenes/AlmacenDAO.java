@@ -11,6 +11,7 @@ import com.daw.dao.Dao;
 import com.daw.excepciones.DataAccessException;
 import com.daw.excepciones.DatoIncorrrectoException;
 import com.daw.modelos.Almacen;
+import com.daw.modelos.Region;
 import com.daw.utils.DBUtils;
 
 public class AlmacenDAO implements Dao<Almacen> {
@@ -19,6 +20,7 @@ public class AlmacenDAO implements Dao<Almacen> {
 	private final String QUERY_ELIMINAR_ALMACEN = "DELETE FROM WAREHOUSES WHERE WAREHOUSE_ID = ?";
 	private final String QUERY_ACTULIZAR_ALMACEN = "UPDATE WAREHOUSES SET WAREHOUSE_NAME = ?, LOCATION_ID = ? WHERE WAREHOUSE_ID = ?";
 	private final String QUERY_OBTENER_TODOS = "SELECT * FROM WAREHOUSES";
+	private final String QUERY_OBTENER_REGIONES = "SELECT * FROM REGIONS";
 
 	@Override
 	public void insertar(Almacen e) throws DataAccessException {
@@ -117,6 +119,28 @@ public class AlmacenDAO implements Dao<Almacen> {
 		}
 
 		return almacenesList;
+	}
+
+	public List<Region> obtenerRegiones() throws DataAccessException {
+		List<Region> regionesList = new ArrayList<>();
+
+		try (Connection conn = DBUtils.getConnection()) {
+			PreparedStatement ps = conn.prepareStatement(QUERY_OBTENER_REGIONES);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long regionId = rs.getLong("REGION_ID");
+				String regionName = rs.getString("REGION_NAME");
+
+				Region region = new Region(regionId, regionName);
+				regionesList.add(region);
+			}
+
+		} catch (SQLException sql) {
+			throw new DataAccessException("Error de base de datos", sql);
+		}
+		return regionesList;
+
 	}
 
 }
