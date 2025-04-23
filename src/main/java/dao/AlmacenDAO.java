@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.Dao;
 import excepciones.DataAccessException;
 import excepciones.DatoIncorrrectoException;
 import modelos.Almacen;

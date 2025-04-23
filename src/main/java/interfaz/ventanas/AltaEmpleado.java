@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import dao.controller.EmpleadoController;
 import excepciones.DataAccessException;
 import modelos.Empleado;
+import utils.Utils;
 
 import javax.swing.JSpinner;
 import java.awt.event.MouseAdapter;
@@ -58,8 +59,10 @@ public class AltaEmpleado extends JDialog {
 	 * Create the dialog.
 	 */
 	public AltaEmpleado() {
+		setResizable(false);
 		setTitle("Insertar Empleado");
-		setBounds(100, 100, 600, 600);
+		setSize(600, 600);
+		setLocation((Utils.AnchoPantalla() - this.getWidth()) / 2, (Utils.AltoPantalla() - this.getHeight()) / 2);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

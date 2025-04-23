@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import dao.controller.AlmacenController;
 import excepciones.DataAccessException;
 import modelos.Region;
+import utils.Utils;
 
 public class AltaAlmacen extends JDialog {
 
@@ -48,7 +49,8 @@ public class AltaAlmacen extends JDialog {
 	 */
 	public AltaAlmacen() {
 		setTitle("Insertar Almacen");
-		setBounds(100, 100, 600, 600);
+		setSize(600, 600);
+		setLocation((Utils.AnchoPantalla() - this.getWidth()) / 2, (Utils.AltoPantalla() - this.getHeight()) / 2);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

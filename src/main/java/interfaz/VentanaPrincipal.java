@@ -18,6 +18,7 @@ import interfaz.ventanas.ModificarDatosCliente;
 import interfaz.ventanas.PedidosClienteVistaDetalle;
 import interfaz.ventanas.RankingEmpleadosPorVolumenVentas;
 import interfaz.ventanas.TraspasoCierreAlmacen;
+import utils.Utils;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -44,8 +45,10 @@ public class VentanaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaPrincipal() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 600);
+		setSize(600, 600);
+		setLocation((Utils.AnchoPantalla() - this.getWidth()) / 2,(Utils.AltoPantalla() - this.getHeight()) / 2);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
