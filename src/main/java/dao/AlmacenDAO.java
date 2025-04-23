@@ -86,7 +86,7 @@ public class AlmacenDAO implements Dao<Almacen> {
 			if (columnas_afectadas == 0) {
 				System.out.println("No se ha encontrado el almacén con el ID proporcionado");
 			} else {
-				System.out.println("Almacen eliminado con exito.");
+				System.out.println("Almacen actualizado con exito.");
 			}
 
 		} catch (SQLException sql) {

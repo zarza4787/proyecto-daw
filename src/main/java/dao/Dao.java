@@ -4,14 +4,14 @@ import java.util.List;
 
 import excepciones.DataAccessException;
 
-public interface Dao<K> {
+public interface Dao<E> {
 
-	void insertar(K obj) throws DataAccessException;
+	void insertar(E obj) throws DataAccessException;
 
-	void eliminar(K obj) throws DataAccessException;
+	void eliminar(E obj) throws DataAccessException;
 
-	void actualizar(K obj) throws DataAccessException;
+	void actualizar(E obj) throws DataAccessException;
 
-	List<K> obtenerTodos() throws DataAccessException;
+	List<E> obtenerTodos() throws DataAccessException;
 
 }

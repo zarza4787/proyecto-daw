@@ -129,8 +129,8 @@ public class AltaAlmacen extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
+				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setActionCommand("Cancelar");
 				buttonPane.add(cancelButton);
 			}
 		}
@@ -141,6 +141,7 @@ public class AltaAlmacen extends JDialog {
 			List<Region> regiones = almacenController.obtenerTodasRegiones();
 			for (Region region : regiones) {
 				comboBox_Regiones.addItem(region.getRegionName());
+				
 			}
 		} catch (DataAccessException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

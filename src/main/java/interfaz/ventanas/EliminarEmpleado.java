@@ -9,11 +9,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import utils.Utils;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class EliminarEmpleado extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -38,9 +41,30 @@ public class EliminarEmpleado extends JDialog {
 		setLocation((Utils.AnchoPantalla() - this.getWidth()) / 2, (Utils.AltoPantalla() - this.getHeight()) / 2);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		{
+			table = new JTable();
+			table.setColumnSelectionAllowed(true);
+			table.setModel(new DefaultTableModel(
+					new Object[][] { { null, null, null, null, null, null, null, null },
+							{ null, null, null, null, null, null, null, null },
+							{ null, null, null, null, null, null, null, null },
+							{ null, null, null, null, null, null, null, null },
+							{ null, null, null, null, null, null, null, null }, },
+					new String[] { "ID", "Nombre", "Apellidos", "Email", "Telefono", "Fecha de alta", "Manager ",
+							"Puesto" }) {
+				Class[] columnTypes = new Class[] { Long.class, Object.class, Object.class, String.class, String.class,
+						String.class, Object.class, Object.class };
+
+				public Class getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+			});
+			table.setBounds(10, 32, 564, 426);
+			contentPanel.add(table);
+		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
