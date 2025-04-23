@@ -51,7 +51,7 @@ public class EmpleadoController {
 		try {
 			return empleadoDAO.obtenerTodos();
 		} catch (Exception e) {
-			throw new DataAccessException("Hubo un error al obtener a los empleados ",	 e);
+			throw new DataAccessException("Hubo un error al obtener a los empleados ", e);
 		}
 	}
 }

@@ -40,8 +40,7 @@ public class Locations {
 
 	@Override
 	public String toString() {
-		return "Locations [locationId=" + locationId + ", address=" + address + ", postalCode=" + postalCode + ", city="
-				+ city + ", state=" + state + ", countryId=" + countryId + "]";
+		return address;
 	}
 
 }

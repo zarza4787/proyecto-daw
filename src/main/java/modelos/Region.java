@@ -20,9 +20,7 @@ public class Region {
 
 	@Override
 	public String toString() {
-		return "Region [regionId=" + regionId + ", regionName=" + regionName + "]";
+		return regionName;
 	}
-
-	
 
 }

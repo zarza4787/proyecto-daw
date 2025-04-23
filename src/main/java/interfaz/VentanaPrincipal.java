@@ -19,6 +19,8 @@ import interfaz.ventanas.PedidosClienteVistaDetalle;
 import interfaz.ventanas.RankingEmpleadosPorVolumenVentas;
 import interfaz.ventanas.TraspasoCierreAlmacen;
 import utils.Utils;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -159,6 +161,7 @@ public class VentanaPrincipal extends JFrame {
 		});
 		btnCancelarPedidoDevolverAlmacen.setBounds(150, 477, 300, 23);
 		contentPane.add(btnCancelarPedidoDevolverAlmacen);
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{contentPane, btnAltaEmpleado, btnAltaAlmacen, btnModificarCliente, btnPedidosVistaCliente, btnEliminarEmpleado, btnTraspasoCierreAlmacen, btnAplicarDescuentoPorCategoria, btnRankingEmpleadosPorVolumenVentas, btnInformeVentasManager, btnCancelarPedidoDevolverAlmacen}));
 
 	}
 }
