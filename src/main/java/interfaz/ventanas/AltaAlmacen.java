@@ -27,9 +27,10 @@ import utils.Utils;
 public class AltaAlmacen extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private AlmacenController almacenController;
-	private RegionController regionController;
+	private AlmacenController almacenController; // controller para el almacen
+	private RegionController regionController; // controller para la region
 
+	// Componentes de la interfaz
 	private JTextField textName;
 	private JComboBox<String> comboBox_Regiones;
 	private JComboBox<String> comboBox_Paises;
@@ -48,8 +49,10 @@ public class AltaAlmacen extends JDialog {
 		}
 	}
 
+	// Lista de regiones y countries
 	private List<Region> listaRegiones;
 	private List<Countries> listaPaises;
+	private List<Locations> listaLocations;
 
 	public AltaAlmacen() {
 		setTitle("Insertar Almacen");
@@ -61,6 +64,7 @@ public class AltaAlmacen extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
+		// Inicializamos el controller
 		almacenController = new AlmacenController();
 		regionController = new RegionController();
 
@@ -91,16 +95,16 @@ public class AltaAlmacen extends JDialog {
 
 		JLabel lblUbicaciones = new JLabel("Ubicaciones");
 		lblUbicaciones.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblUbicaciones.setBounds(21, 151, 150, 47);
+		lblUbicaciones.setBounds(21, 209, 150, 47);
 		contentPanel.add(lblUbicaciones);
 
 		comboBox_Ubicaciones = new JComboBox<>();
-		comboBox_Ubicaciones.setBounds(279, 165, 216, 22);
+		comboBox_Ubicaciones.setBounds(280, 223, 216, 22);
 		contentPanel.add(comboBox_Ubicaciones);
 
 		JLabel lblPaises = new JLabel("Paises");
 		lblPaises.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblPaises.setBounds(21, 209, 150, 47);
+		lblPaises.setBounds(21, 151, 150, 47);
 		contentPanel.add(lblPaises);
 
 		comboBox_Paises = new JComboBox<>();
@@ -109,10 +113,10 @@ public class AltaAlmacen extends JDialog {
 				cargarUbicacionesPorPais();
 			}
 		});
-		comboBox_Paises.setBounds(280, 223, 216, 22);
+		comboBox_Paises.setBounds(279, 165, 216, 22);
 		contentPanel.add(comboBox_Paises);
 
-		cargarRegiones();
+		cargarRegiones(); // Cargamos las regiones en el combox
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -122,35 +126,34 @@ public class AltaAlmacen extends JDialog {
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
+				String nombreAlmacen = textName.getText();
 
-					String nombreAlmacen = textName.getText();
-					int opcionRegion = comboBox_Regiones.getSelectedIndex();
-					if (opcionRegion == -1)
-						return;
+				if (nombreAlmacen.isEmpty()) {
+					okButton.setEnabled(false); // Deshabilitamos el boton en caso de que no haya texto
+				} else {
+					try {
+						// Obtenemos la region seleccionada
+						int opcionRegion = comboBox_Regiones.getSelectedIndex();
+						if (opcionRegion == -1)
+							return;
 
-					// De la opcion seleccionada en el combox guardamos la Id de la region
-					long regionSeleccionada = listaRegiones.get(opcionRegion).getRegionId();
+						// Obtenemos la ID de la region seleccionada
+						long regionSeleccionada = listaRegiones.get(opcionRegion).getRegionId();
 
-					// Llamamos al controller para insertar el almacen en la base de datos
-					almacenController.crearAlmacen(regionSeleccionada, nombreAlmacen);
+						// Llamamos al controller para insertar el almacen en la base de datos
+						almacenController.crearAlmacen(regionSeleccionada, nombreAlmacen);
 
-					JOptionPane.showMessageDialog(null, "Almacen insertado correctamente", "Exito",
-							JOptionPane.INFORMATION_MESSAGE);
-				} catch (DataAccessException ex) {
-					JOptionPane.showMessageDialog(null, "Error al insertar un almacen: " + ex.getMessage(), "Error",
-							JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Almacen insertado correctamente", "Exito",
+								JOptionPane.INFORMATION_MESSAGE);
+					} catch (DataAccessException ex) {
+						JOptionPane.showMessageDialog(null, "Error al insertar un almacen: " + ex.getMessage(), "Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			}
 		});
 		buttonPane.add(okButton);
 		getRootPane().setDefaultButton(okButton);
-
-		if (textName.getText().isEmpty()) {
-			okButton.setEnabled(false);
-		} else {
-			okButton.setEnabled(true);
-		}
 
 		JButton cancelButton = new JButton("Cancelar");
 		cancelButton.addActionListener(new ActionListener() {
@@ -163,7 +166,7 @@ public class AltaAlmacen extends JDialog {
 
 	private void cargarRegiones() {
 		try {
-			// removemos items para evitar que se mezclen las regiones
+			// limpiamos items para evitar que se mezclen las regiones
 			comboBox_Regiones.removeAllItems();
 
 			listaRegiones = regionController.obtenerTodasRegiones();
@@ -179,16 +182,19 @@ public class AltaAlmacen extends JDialog {
 
 	private void cargarPaisesPorRegion() {
 		try {
-			// removemos items para evitar que se mezclen las ubicaciones y los paises
+			// limpiamos items para evitar que se mezclen las ubicaciones y los paises
 			comboBox_Paises.removeAllItems();
 			comboBox_Ubicaciones.removeAllItems();
 
 			// guardamos la opcion seleccionada en una variable
 			int numOpcion = comboBox_Regiones.getSelectedIndex();
+			if (numOpcion == -1)
+				return;
 
 			// guardamos la id de la region
 			int regionId = (int) listaRegiones.get(numOpcion).getRegionId();
 
+			// Obtenemos el pais de la region y la guardamos en la lista
 			listaPaises = regionController.obtenerPaisesPorRegion(regionId);
 			for (Countries pais : listaPaises) {
 				comboBox_Paises.addItem(pais.getCountryName());
@@ -201,20 +207,28 @@ public class AltaAlmacen extends JDialog {
 
 	private void cargarUbicacionesPorPais() {
 		try {
-
 			// removemos items para evitar que se mezclen las ubicaciones
 			comboBox_Ubicaciones.removeAllItems();
 
 			// guardamos la opcion seleccionada en una variable
 			int numOpcion = comboBox_Paises.getSelectedIndex();
+			if (numOpcion == -1)
+				return;
 
 			// guardamos la id del pais
 			String countryId = listaPaises.get(numOpcion).getCountryID();
-			List<Locations> ubicaciones = regionController.obtenerUbicacionesPorPais(countryId);
 
-			for (Locations ubicacion : ubicaciones) {
-				comboBox_Ubicaciones.addItem(ubicacion.getCity());
+			// Obtenemos la ubicacion del pais y la gardamos en la lista de ubicaciones
+			listaLocations = regionController.obtenerUbicacionesPorPais(countryId);
+
+			if (listaLocations.isEmpty()) {
+				comboBox_Ubicaciones.addItem("No existen ubicaciones");
+			} else {
+				for (Locations ubicacion : listaLocations) {
+					comboBox_Ubicaciones.addItem(ubicacion.getCity());
+				}
 			}
+
 		} catch (DataAccessException e) {
 			JOptionPane.showMessageDialog(this, "Error al cargar ubicaciones: " + e.getMessage(), "Error",
 					JOptionPane.ERROR_MESSAGE);

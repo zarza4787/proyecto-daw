@@ -46,21 +46,21 @@ public class AplicarDescuentoPorCategoria extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
+
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(371, 45, 96, 22);
 		contentPanel.add(comboBox);
-		
+
 		JLabel lblCategoria = new JLabel("Categoria");
 		lblCategoria.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblCategoria.setBounds(80, 30, 127, 49);
 		contentPanel.add(lblCategoria);
-		
+
 		JLabel lblDescuento = new JLabel("Descuento");
 		lblDescuento.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblDescuento.setBounds(80, 114, 127, 49);
 		contentPanel.add(lblDescuento);
-		
+
 		JSpinner spinner = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1));
 		spinner.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		spinner.setBounds(405, 122, 62, 33);

@@ -9,13 +9,16 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import dao.controller.EmpleadoController;
+import modelos.Empleado;
 import utils.Utils;
 
-import java.sql.*;
+import java.util.List;
 
 public class ModificarDatosCliente extends JDialog {
 
@@ -23,9 +26,13 @@ public class ModificarDatosCliente extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	private DefaultTableModel model;
+	private JButton okButton;
 
-	// Constructor para inicializar el JDialog
+	private EmpleadoController empleadoController;
+
 	public ModificarDatosCliente() {
+		empleadoController = new EmpleadoController();
+
 		setResizable(false);
 		setTitle("Modificar datos de un cliente");
 		setSize(600, 600);
@@ -36,20 +43,40 @@ public class ModificarDatosCliente extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
-		// Configuración de la tabla
-		table = new JTable();
 		model = new DefaultTableModel();
-		table.setModel(model);
-		table.setBounds(10, 11, 564, 319);
-		contentPanel.add(table);
+		table = new JTable(model);
+		model.setColumnIdentifiers(new String[] { "ID", "Nombre", "Apellido", "Email" });
 
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(10, 11, 564, 319);
+		contentPanel.add(scrollPane);
 
-		// Panel de botones en la parte inferior
+		cargarEmpleadosEnTabla();
+
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
-		JButton okButton = new JButton("OK");
+		okButton = new JButton("Modificar cliente");
+		okButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				int filaSeleccionada = table.getSelectedRow();
+
+				if (filaSeleccionada == -1) {
+					JOptionPane.showMessageDialog(null, "Por favor selecciona una fila.", "Advertencia",
+							JOptionPane.WARNING_MESSAGE);
+					okButton.setEnabled(false);
+				} else {
+					try {
+						empleadoController.eliminarEmpleado(filaSeleccionada);
+						model.removeRow(filaSeleccionada);
+					} catch (Exception e1) {
+						e1.getMessage();
+					}
+				}
+			}
+		});
 		okButton.setActionCommand("OK");
 		buttonPane.add(okButton);
 		getRootPane().setDefaultButton(okButton);
@@ -59,14 +86,24 @@ public class ModificarDatosCliente extends JDialog {
 		cancelButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose(); // Cerrar el dialogo sin hacer cambios
+				dispose();
 			}
 		});
 		buttonPane.add(cancelButton);
 	}
 
+	private void cargarEmpleadosEnTabla() {
+		try {
+			List<Empleado> empleados = empleadoController.obtenerTodosEmpleados();
+			for (Empleado emp : empleados) {
+				model.addRow(new Object[] { emp.getEmployeeID(), emp.getName(), emp.getLastName(), emp.getEmail() });
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Error al cargar empleados: " + e.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
-	// Método principal para probar la ventana (opcional)
 	public static void main(String[] args) {
 		try {
 			ModificarDatosCliente dialog = new ModificarDatosCliente();

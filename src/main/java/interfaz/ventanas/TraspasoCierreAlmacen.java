@@ -46,7 +46,7 @@ public class TraspasoCierreAlmacen extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
+
 		{
 			JLabel lblWareHouseId = new JLabel("ID del Almacen");
 			lblWareHouseId.setFont(new Font("Tahoma", Font.PLAIN, 15));

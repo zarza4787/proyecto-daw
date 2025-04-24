@@ -48,7 +48,7 @@ public class PedidosClienteVistaDetalle extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
+
 		JLabel lblIdCliente = new JLabel("ID del Cliente");
 		lblIdCliente.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblIdCliente.setBounds(80, 30, 137, 30);
@@ -71,11 +71,11 @@ public class PedidosClienteVistaDetalle extends JDialog {
 			textNombreCliente.setBounds(370, 100, 137, 36);
 			contentPanel.add(textNombreCliente);
 		}
-		
+
 		table = new JTable();
 		table.setBounds(10, 172, 564, 290);
 		contentPanel.add(table);
-		
+
 		JButton btnDetalles = new JButton("Detalles");
 		btnDetalles.setEnabled(false);
 		btnDetalles.setBounds(80, 494, 89, 23);
