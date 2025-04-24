@@ -50,7 +50,7 @@ public class VentanaPrincipal extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(600, 600);
-		setLocation((Utils.AnchoPantalla() - this.getWidth()) / 2,(Utils.AltoPantalla() - this.getHeight()) / 2);
+		setLocation((Utils.AnchoPantalla() - this.getWidth()) / 2, (Utils.AltoPantalla() - this.getHeight()) / 2);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -161,7 +161,10 @@ public class VentanaPrincipal extends JFrame {
 		});
 		btnCancelarPedidoDevolverAlmacen.setBounds(150, 477, 300, 23);
 		contentPane.add(btnCancelarPedidoDevolverAlmacen);
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{contentPane, btnAltaEmpleado, btnAltaAlmacen, btnModificarCliente, btnPedidosVistaCliente, btnEliminarEmpleado, btnTraspasoCierreAlmacen, btnAplicarDescuentoPorCategoria, btnRankingEmpleadosPorVolumenVentas, btnInformeVentasManager, btnCancelarPedidoDevolverAlmacen}));
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] { contentPane, btnAltaEmpleado,
+				btnAltaAlmacen, btnModificarCliente, btnPedidosVistaCliente, btnEliminarEmpleado,
+				btnTraspasoCierreAlmacen, btnAplicarDescuentoPorCategoria, btnRankingEmpleadosPorVolumenVentas,
+				btnInformeVentasManager, btnCancelarPedidoDevolverAlmacen }));
 
 	}
 }

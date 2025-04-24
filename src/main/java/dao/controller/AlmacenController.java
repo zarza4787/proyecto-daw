@@ -6,7 +6,6 @@ import dao.AlmacenDAO;
 import excepciones.DataAccessException;
 import excepciones.DatoIncorrrectoException;
 import modelos.Almacen;
-import modelos.Region;
 
 public class AlmacenController {
 
@@ -22,7 +21,7 @@ public class AlmacenController {
 			almacenDAO.insertar(almacen);
 		} catch (DatoIncorrrectoException e) {
 			throw new DataAccessException("Datos incorrectos", e);
-		} 
+		}
 	}
 
 	public void eliminarAlmacen(long wareHouseId) throws DataAccessException, DatoIncorrrectoException {
@@ -52,13 +51,4 @@ public class AlmacenController {
 		}
 	}
 
-	public List<Region> obtenerTodasRegiones() throws DataAccessException {
-
-		try {
-			return almacenDAO.obtenerRegiones();
-		} catch (Exception e) {
-			throw new DataAccessException("Error al obtener las regiones", e);
-		}
-
-	}
 }
