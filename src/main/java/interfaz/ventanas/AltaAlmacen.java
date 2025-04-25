@@ -132,16 +132,15 @@ public class AltaAlmacen extends JDialog {
 					okButton.setEnabled(false); // Deshabilitamos el boton en caso de que no haya texto
 				} else {
 					try {
-						// Obtenemos la region seleccionada
-						int opcionRegion = comboBox_Regiones.getSelectedIndex();
-						if (opcionRegion == -1)
+
+						int opcionUbicacion = comboBox_Ubicaciones.getSelectedIndex();
+						if (opcionUbicacion == -1)
 							return;
 
-						// Obtenemos la ID de la region seleccionada
-						long regionSeleccionada = listaRegiones.get(opcionRegion).getRegionId();
+						long locationSeleccionada = listaLocations.get(opcionUbicacion).getLocationId();
 
 						// Llamamos al controller para insertar el almacen en la base de datos
-						almacenController.crearAlmacen(regionSeleccionada, nombreAlmacen);
+						almacenController.crearAlmacen(locationSeleccionada, nombreAlmacen);
 
 						JOptionPane.showMessageDialog(null, "Almacen insertado correctamente", "Exito",
 								JOptionPane.INFORMATION_MESSAGE);
