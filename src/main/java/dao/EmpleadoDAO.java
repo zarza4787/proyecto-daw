@@ -53,9 +53,9 @@ public class EmpleadoDAO implements Dao<Empleado> {
 
 			ps.setLong(1, e.getEmployeeID());
 
-			int rowsAffected = ps.executeUpdate();
+			int columnasModificadas = ps.executeUpdate();
 
-			if (rowsAffected == 0) {
+			if (columnasModificadas == 0) {
 				throw new DataAccessException("No se pudo eliminar el empleado, ID no encontrado");
 			}
 

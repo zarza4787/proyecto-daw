@@ -40,8 +40,6 @@ public class EmpleadoController {
 			Empleado empleado = new Empleado(employeeId, firstName, lastName, email, phone, hireDate, managerId,
 					jobTitle);
 			empleadoDAO.actualizar(empleado);
-		} catch (DatoIncorrrectoException e) {
-			throw new DataAccessException("Error en los datos introducidos", e);
 		} catch (DataAccessException e) {
 			throw new DataAccessException("Hubo un error al actualizar el empleado", e);
 		}

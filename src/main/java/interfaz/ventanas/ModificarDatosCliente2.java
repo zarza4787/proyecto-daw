@@ -20,17 +20,16 @@ import utils.Utils;
 
 import java.util.List;
 
-public class ModificarDatosCliente extends JDialog {
+public class ModificarDatosCliente2 extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;
 	private DefaultTableModel model;
-	private JButton modificarCliente;
+	private JButton grabarCambios;
 
 	private EmpleadoController empleadoController;
 
-	public ModificarDatosCliente() {
+	public ModificarDatosCliente2() {
 		empleadoController = new EmpleadoController();
 
 		setResizable(false);
@@ -44,12 +43,7 @@ public class ModificarDatosCliente extends JDialog {
 		contentPanel.setLayout(null);
 
 		model = new DefaultTableModel();
-		table = new JTable(model);
 		model.setColumnIdentifiers(new String[] { "ID", "Nombre", "Apellido", "Email" });
-
-		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(10, 11, 564, 319);
-		contentPanel.add(scrollPane);
 
 		cargarEmpleadosEnTabla();
 
@@ -57,29 +51,10 @@ public class ModificarDatosCliente extends JDialog {
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
-		modificarCliente = new JButton("Modificar cliente");
-		modificarCliente.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				int filaSeleccionada = table.getSelectedRow();
-
-				if (filaSeleccionada == -1) {
-					JOptionPane.showMessageDialog(null, "Por favor selecciona una fila.", "Advertencia",
-							JOptionPane.WARNING_MESSAGE);
-					modificarCliente.setEnabled(false);
-				} else {
-					try {
-						ModificarDatosCliente2 d1 = new ModificarDatosCliente2();
-						d1.setVisible(true);
-					} catch (Exception e1) {
-						e1.getMessage();
-					}
-				}
-			}
-		});
-		modificarCliente.setActionCommand("OK");
-		buttonPane.add(modificarCliente);
-		getRootPane().setDefaultButton(modificarCliente);
+		grabarCambios = new JButton("Grabar cambios");
+		grabarCambios.setActionCommand("OK");
+		buttonPane.add(grabarCambios);
+		getRootPane().setDefaultButton(grabarCambios);
 
 		JButton cancelButton = new JButton("Cancel");
 		cancelButton.setActionCommand("Cancel");
