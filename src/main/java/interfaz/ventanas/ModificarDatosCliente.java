@@ -35,7 +35,7 @@ public class ModificarDatosCliente extends JDialog {
 
 		setResizable(false);
 		setTitle("Modificar datos de un cliente");
-		setSize(600, 600);
+		setSize(950, 600);
 		setLocation((Utils.AnchoPantalla() - this.getWidth()) / 2, (Utils.AltoPantalla() - this.getHeight()) / 2);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
@@ -45,10 +45,11 @@ public class ModificarDatosCliente extends JDialog {
 
 		model = new DefaultTableModel();
 		table = new JTable(model);
-		model.setColumnIdentifiers(new String[] { "ID", "Nombre", "Apellido", "Email" });
+		model.setColumnIdentifiers(
+				new String[] { "ID", "Nombre", "Apellido", "Email", "Telefono", "Fecha de alta", "Manager", "Puesto" });
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(10, 11, 564, 319);
+		scrollPane.setBounds(10, 11, 914, 319);
 		contentPanel.add(scrollPane);
 
 		cargarEmpleadosEnTabla();
@@ -66,7 +67,6 @@ public class ModificarDatosCliente extends JDialog {
 				if (filaSeleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "Por favor selecciona una fila.", "Advertencia",
 							JOptionPane.WARNING_MESSAGE);
-					modificarCliente.setEnabled(false);
 				} else {
 					try {
 						ModificarDatosCliente2 d1 = new ModificarDatosCliente2();
@@ -95,8 +95,9 @@ public class ModificarDatosCliente extends JDialog {
 	private void cargarEmpleadosEnTabla() {
 		try {
 			List<Empleado> empleados = empleadoController.obtenerTodosEmpleados();
-			for (Empleado emp : empleados) {
-				model.addRow(new Object[] { emp.getEmployeeID(), emp.getName(), emp.getLastName(), emp.getEmail() });
+			for (Empleado e : empleados) {
+				model.addRow(new Object[] { e.getEmployeeID(), e.getName(), e.getLastName(), e.getEmail(), e.getPhone(),
+						e.getHireDate(), e.getManagerId(), e.getJobTitle() });
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Error al cargar empleados: " + e.getMessage(), "Error",
