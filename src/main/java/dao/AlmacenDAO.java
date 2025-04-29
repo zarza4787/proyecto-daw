@@ -115,4 +115,6 @@ public class AlmacenDAO implements Dao<Almacen> {
 		return almacenesList;
 	}
 
+	
+
 }
