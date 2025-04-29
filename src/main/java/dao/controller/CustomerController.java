@@ -34,10 +34,10 @@ public class CustomerController {
 		}
 	}
 
-	public void actualizarCustomer(String name, String address, String website, double creditLimit)
+	public void actualizarCustomer(long customerId, String name, String address, String website, double creditLimit)
 			throws DataAccessException {
 		try {
-			Customers customerActualizar = new Customers(name, address, website, creditLimit);
+			Customers customerActualizar = new Customers(customerId, name, address, website, creditLimit);
 			customerDAO.actualizar(customerActualizar);
 		} catch (Exception e) {
 			throw new DataAccessException("Hubo un error al actualizar el empleado", e);
@@ -47,6 +47,14 @@ public class CustomerController {
 	public List<Customers> obtenerTodosCustomers() throws DataAccessException {
 		try {
 			return customerDAO.obtenerTodos();
+		} catch (Exception e) {
+			throw new DataAccessException("Hubo un error al obtener a los clientes ", e);
+		}
+	}
+
+	public Customers obtenerPorId(long customerId) throws DataAccessException {
+		try {
+			return customerDAO.obtenerPorId(customerId);
 		} catch (Exception e) {
 			throw new DataAccessException("Hubo un error al obtener a los clientes ", e);
 		}
