@@ -9,7 +9,6 @@ import java.util.List;
 
 import excepciones.DataAccessException;
 import modelos.Contacts;
-import modelos.Countries;
 import modelos.Customers;
 import utils.DBUtils;
 
@@ -132,5 +131,7 @@ public class ContactsDAO implements Dao<Contacts> {
 
 		return customersList;
 	}
+
+	
 
 }
