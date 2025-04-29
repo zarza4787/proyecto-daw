@@ -14,7 +14,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import dao.controller.CustomerController;
 import dao.controller.EmpleadoController;
+import modelos.Customers;
 import modelos.Empleado;
 import utils.Utils;
 
@@ -28,10 +30,10 @@ public class ModificarDatosCliente extends JDialog {
 	private DefaultTableModel model;
 	private JButton modificarCliente;
 
-	private EmpleadoController empleadoController;
+	private CustomerController customerController;
 
 	public ModificarDatosCliente() {
-		empleadoController = new EmpleadoController();
+		customerController = new CustomerController();
 
 		setResizable(false);
 		setTitle("Modificar datos de un cliente");
@@ -45,14 +47,13 @@ public class ModificarDatosCliente extends JDialog {
 
 		model = new DefaultTableModel();
 		table = new JTable(model);
-		model.setColumnIdentifiers(
-				new String[] { "ID", "Nombre", "Apellido", "Email", "Telefono", "Fecha de alta", "Manager", "Puesto" });
+		model.setColumnIdentifiers(new String[] { "ID", "Nombre", "Address", "Website", "Credit Limit" });
 
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBounds(10, 11, 914, 319);
 		contentPanel.add(scrollPane);
 
-		cargarEmpleadosEnTabla();
+		cargarCustomersEnTabla();
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -69,7 +70,8 @@ public class ModificarDatosCliente extends JDialog {
 							JOptionPane.WARNING_MESSAGE);
 				} else {
 					try {
-						ModificarDatosCliente2 d1 = new ModificarDatosCliente2();
+						ModificarDatosCliente2 d1 = new ModificarDatosCliente2(
+								(long) table.getValueAt(filaSeleccionada, 0));
 						d1.setVisible(true);
 					} catch (Exception e1) {
 						e1.getMessage();
@@ -92,12 +94,12 @@ public class ModificarDatosCliente extends JDialog {
 		buttonPane.add(cancelButton);
 	}
 
-	private void cargarEmpleadosEnTabla() {
+	private void cargarCustomersEnTabla() {
 		try {
-			List<Empleado> empleados = empleadoController.obtenerTodosEmpleados();
-			for (Empleado e : empleados) {
-				model.addRow(new Object[] { e.getEmployeeID(), e.getName(), e.getLastName(), e.getEmail(), e.getPhone(),
-						e.getHireDate(), e.getManagerId(), e.getJobTitle() });
+			List<Customers> customers = customerController.obtenerTodosCustomers();
+			for (Customers c : customers) {
+				model.addRow(new Object[] { c.getCustomerId(), c.getName(), c.getAddress(), c.getWebsite(),
+						c.getCreditLimit() });
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Error al cargar empleados: " + e.getMessage(), "Error",
