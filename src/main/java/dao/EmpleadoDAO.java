@@ -19,6 +19,7 @@ public class EmpleadoDAO implements Dao<Empleado> {
 	private final String QUERY_ELIMINAR_EMPLEADO = "DELETE FROM EMPLOYEES WHERE EMPLOYEE_ID = ?";
 	private final String QUERY_ACTUALIZAR_EMPLEADO = "UPDATE EMPLOYEES SET FIRST_NAME = ?, LAST_NAME = ?, EMAIL = ?, PHONE = ?, JOB_TITLE = ? WHERE EMPLOYEE_ID = ?";
 	private final String QUERY_OBTENER_TODOS = "SELECT * FROM EMPLOYEES";
+	
 
 	@Override
 	public void insertar(Empleado e) throws DataAccessException {
@@ -34,8 +35,8 @@ public class EmpleadoDAO implements Dao<Empleado> {
 			ps.setString(2, e.getLastName());
 			ps.setString(3, e.getEmail());
 			ps.setString(4, e.getPhone());
-			Date hireDateSQL = Date.valueOf(e.getHireDate());
-			ps.setDate(5, hireDateSQL);
+			Date fechaAlta = Date.valueOf(e.getHireDate());
+			ps.setDate(5, fechaAlta);
 			ps.setLong(6, e.getManagerId());
 			ps.setString(7, e.getJobTitle());
 

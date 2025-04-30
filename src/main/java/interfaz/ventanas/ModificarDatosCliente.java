@@ -14,7 +14,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import dao.controller.CustomerController;
 import dao.controller.EmpleadoController;
+import modelos.Customers;
 import modelos.Empleado;
 import utils.Utils;
 
@@ -28,14 +30,14 @@ public class ModificarDatosCliente extends JDialog {
 	private DefaultTableModel model;
 	private JButton modificarCliente;
 
-	private EmpleadoController empleadoController;
+	private CustomerController customerController;
 
 	public ModificarDatosCliente() {
-		empleadoController = new EmpleadoController();
+		customerController = new CustomerController();
 
 		setResizable(false);
 		setTitle("Modificar datos de un cliente");
-		setSize(600, 600);
+		setSize(950, 600);
 		setLocation((Utils.AnchoPantalla() - this.getWidth()) / 2, (Utils.AltoPantalla() - this.getHeight()) / 2);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
@@ -45,13 +47,13 @@ public class ModificarDatosCliente extends JDialog {
 
 		model = new DefaultTableModel();
 		table = new JTable(model);
-		model.setColumnIdentifiers(new String[] { "ID", "Nombre", "Apellido", "Email" });
+		model.setColumnIdentifiers(new String[] { "ID", "Nombre", "Address", "Website", "Credit Limit" });
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(10, 11, 564, 319);
+		scrollPane.setBounds(10, 11, 914, 319);
 		contentPanel.add(scrollPane);
 
-		cargarEmpleadosEnTabla();
+		cargarCustomersEnTabla();
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -66,16 +68,22 @@ public class ModificarDatosCliente extends JDialog {
 				if (filaSeleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "Por favor selecciona una fila.", "Advertencia",
 							JOptionPane.WARNING_MESSAGE);
-					modificarCliente.setEnabled(false);
-				} else {
-					try {
-						ModificarDatosCliente2 d1 = new ModificarDatosCliente2();
-						d1.setVisible(true);
-					} catch (Exception e1) {
-						e1.getMessage();
-					}
+					return;
+				}
+
+				// Guardamos la id en un objeto de la fila seleccionada y de la columna 0 (ID)
+				Object id = table.getValueAt(filaSeleccionada, 0);
+
+				try {
+					long customerId = Long.parseLong(id.toString());
+					ModificarDatosCliente2 d1 = new ModificarDatosCliente2(customerId);
+					d1.setVisible(true);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Error al abrir ventana: " + e1.getMessage(), "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
+
 		});
 		modificarCliente.setActionCommand("OK");
 		buttonPane.add(modificarCliente);
@@ -92,11 +100,12 @@ public class ModificarDatosCliente extends JDialog {
 		buttonPane.add(cancelButton);
 	}
 
-	private void cargarEmpleadosEnTabla() {
+	private void cargarCustomersEnTabla() {
 		try {
-			List<Empleado> empleados = empleadoController.obtenerTodosEmpleados();
-			for (Empleado emp : empleados) {
-				model.addRow(new Object[] { emp.getEmployeeID(), emp.getName(), emp.getLastName(), emp.getEmail() });
+			List<Customers> customers = customerController.obtenerTodosCustomers();
+			for (Customers c : customers) {
+				model.addRow(new Object[] { c.getCustomerId(), c.getName(), c.getAddress(), c.getWebsite(),
+						c.getCreditLimit() });
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Error al cargar empleados: " + e.getMessage(), "Error",

@@ -3,12 +3,18 @@ package interfaz.ventanas;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.border.EmptyBorder;
@@ -17,16 +23,6 @@ import dao.controller.EmpleadoController;
 import excepciones.DataAccessException;
 import modelos.Empleado;
 import utils.Utils;
-
-import javax.swing.JSpinner;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.text.SimpleDateFormat;
-import java.util.List;
-
-import javax.swing.JComboBox;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class AltaEmpleado extends JDialog {
 
@@ -177,8 +173,8 @@ public class AltaEmpleado extends JDialog {
 									JOptionPane.INFORMATION_MESSAGE);
 							dispose();
 						} catch (DataAccessException e1) {
-							JOptionPane.showMessageDialog(null, "Error al insertar empleado: " + e1.getMessage(),
-									"Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Error: " + e1.getMessage(), "Error",
+									JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				});
