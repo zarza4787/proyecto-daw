@@ -68,6 +68,7 @@ public class ModificarDatosCliente extends JDialog {
 				if (filaSeleccionada == -1) {
 					JOptionPane.showMessageDialog(null, "Por favor selecciona una fila.", "Advertencia",
 							JOptionPane.WARNING_MESSAGE);
+<<<<<<< HEAD
 					return;
 				}
 
@@ -81,6 +82,16 @@ public class ModificarDatosCliente extends JDialog {
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "Error al abrir ventana: " + e1.getMessage(), "Error",
 							JOptionPane.ERROR_MESSAGE);
+=======
+				} else {
+					try {
+						ModificarDatosCliente2 d1 = new ModificarDatosCliente2(
+								(long) table.getValueAt(filaSeleccionada, 0));
+						d1.setVisible(true);
+					} catch (Exception e1) {
+						e1.getMessage();
+					}
+>>>>>>> 2eafbcf111da3eb8603ec36ab729339b5f433f27
 				}
 			}
 

@@ -108,7 +108,10 @@ public class ModificarDatosCliente2 extends JDialog {
 		textCreditLimit.setBounds(364, 210, 162, 29);
 		contentPanel.add(textCreditLimit);
 
+<<<<<<< HEAD
 		// Creamos un cliente de tipo customer para poder obtener el el ID
+=======
+>>>>>>> 2eafbcf111da3eb8603ec36ab729339b5f433f27
 		Customers cliente = customerController.obtenerPorId(customerId);
 
 		textName.setText(cliente.getName());
@@ -134,9 +137,15 @@ public class ModificarDatosCliente2 extends JDialog {
 				double credit = Double.parseDouble(textCreditLimit.getText());
 				try {
 					customerController.actualizarCustomer(customerId, nombre, address, website, credit);
+<<<<<<< HEAD
 					JOptionPane.showMessageDialog(null, "El cliente ha sido actualizado con exito", "Éxito",
 							JOptionPane.INFORMATION_MESSAGE);
 					dispose();
+=======
+					JOptionPane.showMessageDialog(null, "Cliente actualizado correctamente", "Éxito",
+							JOptionPane.INFORMATION_MESSAGE);
+
+>>>>>>> 2eafbcf111da3eb8603ec36ab729339b5f433f27
 				} catch (DataAccessException ex) {
 					JOptionPane.showMessageDialog(null, "Error al insertar empleado: " + ex.getMessage(), "Error",
 							JOptionPane.ERROR_MESSAGE);

@@ -128,10 +128,28 @@ public class AltaAlmacen extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+<<<<<<< HEAD
 				try {
 
 					if (nombreAlmacen.trim().isEmpty()) {
 						JOptionPane.showMessageDialog(null, "Debes de introducir un nombre para el almacen", "Error",
+=======
+				if (nombreAlmacen.isEmpty()) {
+					okButton.setEnabled(false); // Deshabilitamos el boton en caso de que no haya texto
+				} else {
+					try {
+
+						int opcionUbicacion = comboBox_Ubicaciones.getSelectedIndex();
+						if (opcionUbicacion == -1)
+							return;
+
+						long locationSeleccionada = listaLocations.get(opcionUbicacion).getLocationId();
+
+						// Llamamos al controller para insertar el almacen en la base de datos
+						almacenController.crearAlmacen(locationSeleccionada, nombreAlmacen);
+
+						JOptionPane.showMessageDialog(null, "Almacen insertado correctamente", "Exito",
+>>>>>>> 2eafbcf111da3eb8603ec36ab729339b5f433f27
 								JOptionPane.INFORMATION_MESSAGE);
 						return;
 					}

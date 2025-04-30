@@ -194,6 +194,7 @@ public class AltaEmpleado extends JDialog {
 	private void cargarJefes() {
 		try {
 			List<Empleado> empleados = empleadoController.obtenerTodosEmpleados();
+			System.out.println("Cantidad de empleados: " + empleados.size());
 			for (Empleado empleado : empleados) {
 				comboBox.addItem(empleado.getName() + " " + empleado.getLastName());
 			}

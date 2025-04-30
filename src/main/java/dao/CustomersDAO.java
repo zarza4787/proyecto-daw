@@ -106,7 +106,11 @@ public class CustomersDAO implements Dao<Customers> {
 	}
 
 	public Customers obtenerPorId(long customerId) throws DataAccessException {
+<<<<<<< HEAD
 		String QUERY_OBTENER_POR_ID = "SELECT * FROM CUSTOMERS WHERE customer_id = ?";
+=======
+		String QUERY_OBTENER_POR_ID = "SELECT * FROM CUSTOMERS WHERE customer_id = " + customerId;
+>>>>>>> 2eafbcf111da3eb8603ec36ab729339b5f433f27
 
 		try (Connection conn = DBUtils.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement(QUERY_OBTENER_POR_ID);
